@@ -18,5 +18,7 @@ public class Journal {
         this.records.remove(index);
     }
 
-
+    public Record getRecord(int index) {
+        return records.get(index);
+    }
 }
