@@ -5,7 +5,6 @@ import java.time.LocalDate;
 public class Record {
     private String readerName;
     private int readerNumber;
-
     private Book book;
     private LocalDate dateRecord;
     private LocalDate retDate;
@@ -64,5 +63,12 @@ public class Record {
 
     public void setDateRecord(LocalDate dateRecord) {
         this.dateRecord = dateRecord;
+    }
+
+    @Override
+    public String toString() {
+        return "Читатель ='" + readerName +
+                ", Номер читательского билета =" + readerNumber +
+                ", Книга =" + book + ", Дата взятия =" + dateRecord + ", Дата возврата =" + retDate;
     }
 }

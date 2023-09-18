@@ -1,8 +1,8 @@
 package org.example.library;
 
 public class Human {
-    private String name;
-    private int age;
+    protected String name;
+    protected int age;
 
     public Human() {
         this.name = "name";

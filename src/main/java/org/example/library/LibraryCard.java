@@ -17,7 +17,8 @@ public class LibraryCard {
     }
 
     public void addRecord(Book book) {
-        records.add(new Record(this.name, this.number, book, LocalDate.now(), LocalDate.now().plusDays(10)));
+        Record record = new Record(this.name, this.number, book, LocalDate.now(), LocalDate.now().plusDays(10));
+        records.add(record);
     }
 
     public String getName() {
@@ -42,5 +43,14 @@ public class LibraryCard {
 
     public void setNumber(int number) {
         this.number = number;
+    }
+
+    @Override
+    public String toString() {
+        return "Читательский билет: \n" +
+                "Имя ='" + name + "\n" +
+                "Возраст=" + age + "\n" +
+                "Номер билета=" + number + "\n" +
+                "Записи =" + records;
     }
 }

@@ -14,20 +14,19 @@ public class Reader extends Human {
 
     public void addBook(Book book) {
         this.books.add(book);
-
     }
 
-    public Book outBook(String name, String author) {
-        Book book = null;
-        for (int i = 0; i < this.books.size(); i++) {
-            if (books.get(i).getName().equals(name) && books.get(i).getAuthor().equals(author)) {
-                book = books.get(i);
-                this.books.remove(i);
-                this.lbCard
-            }
-        }
-        return book;
-    }
+//    public Book outBook(String name, String author) {
+//        Book book = null;
+//        for (int i = 0; i < this.books.size(); i++) {
+//            if (books.get(i).getName().equals(name) && books.get(i).getAuthor().equals(author)) {
+//                book = books.get(i);
+//                this.books.remove(i);
+//                this.lbCard
+//            }
+//        }
+//        return book;
+//    }
 
     public LibraryCard getLbCard() {
         return lbCard;
@@ -35,5 +34,10 @@ public class Reader extends Human {
 
     public void setLbCard(LibraryCard lbCard) {
         this.lbCard = lbCard;
+    }
+
+    @Override
+    public String toString() {
+        return this.name + "\n" + books + "\n" + lbCard;
     }
 }
