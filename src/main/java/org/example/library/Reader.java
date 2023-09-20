@@ -3,6 +3,7 @@ package org.example.library;
 import java.util.ArrayList;
 
 public class Reader extends Human {
+
     private ArrayList<Book> books;
     private LibraryCard lbCard;
 
@@ -14,6 +15,26 @@ public class Reader extends Human {
 
     public void addBook(Book book) {
         this.books.add(book);
+    }
+
+    public Book giveAwayBook(String name, String author) {
+        Book res = null;
+        int index = this.checkBook(name, author);
+        if (!(index < 0)) {
+            res = books.get(index);
+            books.remove(index);
+        }
+        return res;
+    }
+
+    public int checkBook(String name, String author) {
+        int res = -1;
+        for (int i = 0; i < this.books.size(); i++) {
+            if (books.get(i).getName().equals(name) && books.get(i).getAuthor().equals(author)) {
+                res = i;
+            }
+        }
+        return res;
     }
 
 //    public Book outBook(String name, String author) {
@@ -36,8 +57,26 @@ public class Reader extends Human {
         this.lbCard = lbCard;
     }
 
+    public ArrayList<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(ArrayList<Book> books) {
+        this.books = books;
+    }
+
     @Override
     public String toString() {
-        return this.name + "\n" + books + "\n" + lbCard;
+        String str = new String();
+        str += "============\nЧитатель\n";
+        str += "---------------------------\n";
+        str += lbCard.toString() + "\n";
+        str += "---------------------------\n";
+        str += "Книги: \n";
+        for (Book book:books) {
+            str += book.toString() + "\n";
+        }
+        str += "---------------------------\n";
+        return str;
     }
 }

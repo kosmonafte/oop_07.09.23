@@ -2,27 +2,30 @@ package org.example.library;
 
 import java.time.LocalDate;
 
-public class Record {
-    private String readerName;
-    private int readerNumber;
-    private Book book;
-    private LocalDate dateRecord;
-    private LocalDate retDate;
+public abstract class Record {
+
+    protected String status;
+    protected Book book;
+    protected LocalDate dateRecord;
 
     public Record() {
-        this.readerName = "readerName";
-        this.readerNumber = 9999999;
+        this.status = null;
         this.book = new Book();
         this.dateRecord = LocalDate.now();
-        this.retDate = LocalDate.now();
     }
 
-    public Record(String readerName, int readerNumber, Book book, LocalDate dateRecord, LocalDate retDate) {
-        this.readerName = readerName;
-        this.readerNumber = readerNumber;
+    public Record(Book book) {
+        this.status = null;
         this.book = book;
-        this.dateRecord = dateRecord;
-        this.retDate = retDate;
+        this.dateRecord = LocalDate.now();
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Book getBook() {
@@ -31,30 +34,6 @@ public class Record {
 
     public void setBook(Book book) {
         this.book = book;
-    }
-
-    public LocalDate getRetDate() {
-        return retDate;
-    }
-
-    public void setRetDate(LocalDate retDate) {
-        this.retDate = retDate;
-    }
-
-    public String getReaderName() {
-        return readerName;
-    }
-
-    public void setReaderName(String readerName) {
-        this.readerName = readerName;
-    }
-
-    public int getReaderNumber() {
-        return readerNumber;
-    }
-
-    public void setReaderNumber(int readerNumber) {
-        this.readerNumber = readerNumber;
     }
 
     public LocalDate getDateRecord() {
@@ -67,8 +46,6 @@ public class Record {
 
     @Override
     public String toString() {
-        return "Читатель ='" + readerName +
-                ", Номер читательского билета =" + readerNumber +
-                ", Книга =" + book + ", Дата взятия =" + dateRecord + ", Дата возврата =" + retDate;
+        return book + " " + dateRecord;
     }
 }

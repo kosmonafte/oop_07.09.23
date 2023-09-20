@@ -15,5 +15,13 @@ public class LibraryLife {
         System.out.println();
         System.out.println(library.toString());
         System.out.println(reader.toString());
+        library.outBook("Моряк в седле", "Ирвинг Стоун", reader);
+        System.out.println();
+        System.out.println(library.toString());
+        System.out.println(reader.toString());
+        library.returnBook("Шерлок Холмс", "Артур Конан Дойл", reader);
+        System.out.println();
+        System.out.println(library.toString());
+        System.out.println(reader.toString());
     }
 }

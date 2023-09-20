@@ -35,26 +35,32 @@ public class Library {
         return reader;
     }
 
-    public boolean checkBook(String name, String author) {
-        boolean res = false;
+    public int checkBook(String name, String author) {
+        int res = -1;
         for (int i = 0; i < books.size(); i++) {
             if (this.books.get(i).getName().equals(name) && this.books.get(i).getAuthor().equals(author)) {
-                res = true;
+                res = i;
             }
         }
         return res;
     }
 
     public void outBook(String name, String author, Reader reader) {
-        if (this.checkBook(name, author)) {
-            for (int i = 0; i < books.size(); i++) {
-                if (this.books.get(i).getName().equals(name) && this.books.get(i).getAuthor().equals(author)) {
-                    reader.addBook(this.books.get(i));
-                    journal.addRecord(reader.getLbCard(), this.books.get(i));
-                    reader.getLbCard().addRecord(this.books.get(i));
-                    books.remove(i);
-                }
-            }
+        int index = this.checkBook(name, author);
+        if (!(index < 0)) {
+            reader.addBook(this.books.get(index));
+            journal.addOpenRecord(reader.getLbCard(), this.books.get(index));
+            reader.getLbCard().addOpenRecord(this.books.get(index));
+            books.remove(index);
+        }
+    }
+
+    public void returnBook(String name, String author, Reader reader) {
+        int index = reader.checkBook(name, author);
+        if (!(index < 0)) {
+            journal.addCloseRecord(reader.getLbCard(), reader.getBooks().get(index));
+            reader.getLbCard().addCloseRecord(reader.getBooks().get(index));
+            this.addBook(reader.giveAwayBook(name, author));
         }
     }
 
@@ -83,14 +89,21 @@ public class Library {
     @Override
     public String toString() {
         String str = new String();
+        str += "===========================\nБИБИЛОТЕКА\n";
+        str += "---------------------------\n";
         str += "Список книг: \n";
         for (Book book:this.books) {
-            str += book.getAuthor() + ": " + book.getName() + "\n";
+            str += book.toString() + "\n";
         }
+        str += "---------------------------\n";
         str += "Читательские билеты: \n";
         for (LibraryCard card:this.libraryCards) {
-            str += "Имя: "+card.getName() + " Возраст: " + card.getAge() + " Номер читательского билета: " + card.getNumber() + "\n";
+            str += card.getNumber() + ". Дата выдачи: " + card.getCreationDate() + " Имя держателя: " + card.getName() + "\n";
         }
+        str += "---------------------------\n";
+
+        str += this.journal.toString();
+        str += "---------------------------\n";
         return str;
     }
 }

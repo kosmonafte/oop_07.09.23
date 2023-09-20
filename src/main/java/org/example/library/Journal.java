@@ -11,8 +11,13 @@ public class Journal {
         this.records = new ArrayList<>();
     }
 
-    public void addRecord(LibraryCard card, Book book) {
-        Record record = new Record(card.getName(), card.getNumber(), book, LocalDate.now(), LocalDate.now().plusDays(10));
+    public void addOpenRecord(LibraryCard card, Book book) {
+        OpenJournalRecord record = new OpenJournalRecord(card, book, 10);
+        this.records.add(record);
+    }
+
+    public void addCloseRecord(LibraryCard card, Book book) {
+        CloseJournalRecord record = new CloseJournalRecord(card, book);
         this.records.add(record);
     }
 
@@ -26,6 +31,12 @@ public class Journal {
 
     @Override
     public String toString() {
-        return records.toString();
+        String str = new String();
+        str += "Журнал\n";
+        str += "Статус:\t\t№ Ч/Б\t\tАвтор-Название:\t\t\t\t\t\tДата записи:\t\tВернуть до:\n";
+        for (Record record:records) {
+            str += record.toString() + "\n";
+        }
+        return str;
     }
 }
